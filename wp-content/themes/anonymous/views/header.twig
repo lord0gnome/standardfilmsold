@@ -1,0 +1,31 @@
+{% if device_type == 'desktop' %}
+<header id="header">
+{% else %}
+<header id="header" class="hidden">
+{% endif %}
+	<nav class="nav" role="navigation">
+		<a class="nav__logo" href="{{site.url}}" target="_self" rel="nofollow">
+			<img src="{{site.theme.link}}/Standard_logo_red.svg" width="146">
+			
+		</a>
+
+		<ul class="nav__top">
+		{% for item in menu.items %}
+			<li id="menu-item-{{item.ID}}" class="nav__top__item nav__top__item--{{item.type}} nav__top__item--{{item.object}}">
+				<a href="{{item.link}}">{{item.title}}</a>
+				{% if item.has_child_class %}
+	                <ul class="submenu">
+	                	{% for subitem in item.get_children %}
+	                    <li>
+	                    	<a href="{{subitem.link}}">{{subitem.title}}</a>
+	                    </li>
+	                    {% endfor %}
+	                </ul>
+	            {% endif %}
+			</li>
+		{% endfor %}
+		</ul>
+		
+		<a href="{{function('get_post_type_archive_link', 'director')}}" class="close-poppin">Close</a>
+	</nav>
+</header>

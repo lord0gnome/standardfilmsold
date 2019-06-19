@@ -1,0 +1,56 @@
+{% spaceless %}
+<ul class="movies">
+	{% for movie in more_movie %}
+	<li class="movies__item movies__item--film">
+		<div class="text-wrapper animated">
+			<h1 class="yo">{{movie.title}}</h1>
+
+			<span class="info">
+				<i class="director">{{"%s "|format(movie.get_field('subtitle'))}}{{movie.get_field('director') is not empty ? 'by ' : ''}}{{movie.get_field('director')[0].post_title}}</i>
+				<i class="hover-watch">Watch the film</i>
+			</span>
+		</div>
+
+		<div class="{{movie.get_field('custom_file_mp4__webm')}} video-full-wrapper additional">
+			<div class="video-info hidden">
+				<span><i>{{movie.title}}, {{movie.get_field('subtitle')}}</i></span>
+				{% if movie.get_field('director') is not empty %}
+					<span class="video-director"><i>by <a href="{{movie.get_field('director')[0].link}}">{{movie.get_field('director')[0].post_title|trim}}</a></i></span>
+				{% endif %}
+			</div>
+
+			{% if movie.get_field('custom_file_mp4__webm') == 'wiredrive' %}
+				<div class="poster" style="background: url('{{movie.get_field('cover')|resize(1280)}}') center no-repeat; background-size: cover;"></div>
+				{{movie.get_field('wiredrive')|parse_wiredrive}}
+			{% else %}
+				<video preload="auto" poster="{{movie.get_field('cover')|resize(1280)}}">
+					{% if movie.get_field('video_full_webm') %}
+						<source src="{{movie.get_field('video_full_webm')}}">
+					{% endif %}
+					{% if movie.get_field('video_full_mp4') %}
+						<source src="{{movie.get_field('video_full_mp4')}}">
+					{% endif %}
+				</video>
+			{% endif %}
+
+			<canvas class="canvas-loader"></canvas>
+		</div>
+	</li>
+	{% endfor %}
+
+	{% for director in directors %}
+	<li class="movies__item movies__item--director" style="background: url('{{director.get_field('director_cover')|resize(1280)}}') center no-repeat; background-size: cover;">
+		<a href="{{director.link}}" target="_self">
+			<div class="text-wrapper animated">
+				<h1>{{director.title}}</h1>
+
+				<span class="info">
+					<i class="director">{{director.get_field('director_title')}}</i>
+					<i class="hover-watch">see more</i>
+				</span>
+			</div>
+		</a>
+	</li>
+	{% endfor %}
+</ul>
+{% endspaceless %}

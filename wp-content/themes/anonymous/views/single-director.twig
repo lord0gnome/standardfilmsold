@@ -1,0 +1,151 @@
+{% extends "page.twig" %}
+
+{% block page_content %}
+
+	<div class="director__cover">
+		<div class="title-wrapper">
+			<h1 class="director__name">{{post.title}}</h1>
+
+			<span class="director__cover__title">{{post.get_field('director_title')}}</span>
+		</div>
+
+		<div class="director__cover__background" style="background: url('{{ post.get_field('director_cover')|resize(1280, 720) }}') center no-repeat; background-size:cover;">
+			<div class="background__cover__black"></div>
+
+			<a href="" data-anchor="#director-content" class="director__cover__scroll">
+				<span class="icon icon--arrow"></span>
+				<i>scroll down</i>
+			</a>
+		</div>
+	</div>
+
+	<section id="director-content" class="container content-section">
+		<section class="director__realisations">
+		{% for project in post.get_field('content') %}
+			{% if project.acf_fc_layout == 'work' %}
+
+				<article class="single-realisation">
+					{% if project.work.get_field('custom_file_mp4__webm') == 'wiredrive' and project.work.get_field('wiredrive') is empty %}
+					<div class="single-realisation__text text-wrapper no-video">
+					{% elseif project.work.get_field('video_full_webm') and project.work.get_field('video_full_mp4')%}
+					<div class="single-realisation__text text-wrapper no-video">
+					{% else %}
+					<div class="single-realisation__text text-wrapper">
+					{% endif %}
+						<h1 class="title">{{project.work.title}}</h1>
+
+						<span class="info">
+							<i class="director">{{(project.work.subtitle is empty) ? 'Video': project.work.subtitle}}</i>
+							<i class="hover-watch">Watch the film</i>
+						</span>
+					</div>
+
+					<div class="single-realisation__video">
+						<div class="video">
+							<div class="{{project.work.get_field('custom_file_mp4__webm')}} video-wrapper" data-link="{{project.work.get_permalink()}}">
+								<div class="video-wrapper__overlay" style="background: url('{{project.work.get_field('cover')|resize(1280)}}') center no-repeat; background-size:cover;"></div>
+
+								<span class="icon icon--press-play hidden"></span>
+								{% if project.work.get_field('custom_file_mp4__webm') == 'wiredrive' %}
+									{{project.work.get_field('wiredrive')|parse_wiredrive}}
+								{% else %}
+									<video preload="none">
+										{% if project.work.get_field('video_full_webm') %}
+											<source src="{{project.work.get_field('video_full_webm')}}">
+										{% endif %}
+										{% if project.work.get_field('video_full_mp4') %}
+											<source src="{{project.work.get_field('video_full_mp4')}}">
+										{% endif %}
+									</video>
+								{% endif %}
+
+								<canvas class="canvas-loader"></canvas>
+							</div>
+						</div>
+					</div>
+
+					{% if project.work.get_field('has_more_details') and project.work.get_field('description') is not empty %}
+						<a href="{{project.work.link}}" class="single-realisation__link get-more-details" data-id="{{project.work.id}}">read more details</a>
+					{% endif %}
+				</article>
+
+			{% elseif project.acf_fc_layout == 'gallery' %}
+				<article class="single-realisation__slideshow slideshow">
+					<div class="slideshow--title text-wrapper">
+						<h1 class="title">{{project.gallery_title}}</h1>
+
+						<span class="info">
+							<i class="director">Gallery</i>
+							<i class="hover-watch">Discover</i>
+						</span>
+					</div>
+
+					<div class="slideshow-wrapper">
+						<ul class="slideshow-container">
+							{% for image in project.gallery %}
+								<li class="block--slideshow">
+									<img src="{{ TimberImage(image)|resize(1280) }}" alt="{{project.gallery_title}}">
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+
+					<nav class="slideshow--nav">
+						<span class="prev-btn">previous</span>
+						<span>|</span>
+						<span class="next-btn">next</span>
+					</nav>
+				</article>
+			{% endif %}
+		{% endfor %}
+		</section>
+
+		<section class="director__presentation">
+			{% if post.get_field('director_description') %}
+				<p class="director__presentation__description">{{post.get_field('director_description')}}</p>
+
+				<p class="director__presentation__details">{{post.get_field('director_details')}}</p>
+			{% endif %}
+
+			{% if post.get_field('facebook_link') or post.get_field('twitter_link') or post.get_field('instagram_link') or post.get_field('tumblr_link') or post.get_field('website_link') %}
+			<div class="director__presentation__social" {{post.get_field('director_description') is empty ? 'style="margin-top:0;"'}}>
+				{% if post.get_field('facebook_link') %}
+					{% if links == 1 %}
+						<a href="{{ post.get_field('facebook_link') }}" target="_blank"><span class="text">facebook</span></a>
+					{% else %}
+						<a href="{{ post.get_field('facebook_link') }}" target="_blank"><span class="icon icon--facebook"></span></a>
+					{% endif %}
+				{% endif %}
+
+				{% if post.get_field('twitter_link') %}
+					{% if links == 1 %}
+						<a href="{{ post.get_field('twitter_link') }}" target="_blank"><span class="text">twitter</span></a>
+					{% else %}
+						<a href="{{ post.get_field('twitter_link') }}" target="_blank"><span class="icon icon--twitter"></span></a>
+					{% endif %}
+				{% endif %}
+
+				{% if post.get_field('instagram_link') %}
+					{% if links == 1 %}
+						<a href="{{ post.get_field('instagram_link') }}" target="_blank"><span class="text">instagram</span></a>
+					{% else %}
+						<a href="{{ post.get_field('instagram_link') }}" target="_blank"><span class="icon icon--instagram"></span></a>
+					{% endif %}
+				{% endif %}
+
+				{% if post.get_field('tumblr_link') %}
+					{% if links == 1 %}
+						<a href="{{ post.get_field('tumblr_link') }}" target="_blank"><span class="text">tumblr</span></a>
+					{% else %}
+						<a href="{{ post.get_field('tumblr_link') }}" target="_blank"><span class="icon icon--tumblr"></span></a>
+					{% endif %}
+				{% endif %}
+
+				{% if post.get_field('website_link') %}
+					<a href="{{ post.get_field('website_link') }}" target="_blank"><span class="icon icon--website"></span></a>
+				{% endif %}
+			</div>
+			{% endif %}
+		</section>
+	</section>
+{% endblock %}

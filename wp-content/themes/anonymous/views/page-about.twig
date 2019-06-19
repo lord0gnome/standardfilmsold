@@ -1,0 +1,97 @@
+{% extends "page.twig" %}
+
+{% block page_content %}
+	<section class="container {{post.get_field('title') is empty ? "no-title"}}">
+	  {% if post.get_field('title') is not empty %}
+
+		{#{% if device_type == 'desktop' %}
+		<svg xmlns="http://www.w3.org/2000/svg" height="0" width="0" class="svg-filter">
+			<filter id="filter">
+				<feImage xlink:href="{{post.thumbnail.src}}" preserveAspectRatio="xMidYMid"  />
+				<feComposite in2="SourceGraphic" operator="in" />
+			</filter>
+		</svg>
+
+		<style>
+			@supports (-webkit-background-clip: text) {
+				.head { background: url('{{post.thumbnail.src}}') center no-repeat; }
+			}
+
+			@supports not (-webkit-background-clip: text) {
+				.head { filter: url('#filter'); }
+			}
+		</style>
+		{% else %}
+		<style>
+			@supports (-webkit-background-clip: text) {
+				.head { background: url('{{post.get_field('mobile_title_background')|resize(320)}}') center no-repeat; }
+			}
+
+			@supports not (-webkit-background-clip: text) {
+				.head { color: #fff; }
+			}
+		</style>
+		{% endif %}#}
+
+	  <div class="center">
+		<div class="head">
+			{{post.get_field('title')}}
+		</div>
+
+	  {% endif %}
+
+	  {% if post.get_field('title') is empty %}
+	  	<div class="center">
+	  {% endif %}
+
+		<ul class="contact">
+			{% for contact in post.get_field('contact') %}
+				<li class="contact__item">
+					<span class="name">{{contact.name}}</span>
+					<span class="role">{{contact.role}}</span>
+
+					<a href="mailto:{{contact.mail|trim}}" class="mail" target="_self">{{contact.mail}}</a>
+				</li>
+			{% endfor %}
+		</ul>
+
+		<a href="http://www.google.fr/maps/search/{{post.get_field('address')|url_encode}}" class="address" target="_blank">{{post.get_field('address')}}</a>
+
+		<a href="tel:{{post.get_field('phone')|trim}}" class="phone" target="_self">{{post.get_field('phone')}}</a>
+
+		{% if post.get_field('facebook_link') is not empty or post.get_field('twitter_link') is not empty or post.get_field('instagram_link') is not empty %}
+			<ul class="social-link">
+				{% if post.get_field('facebook_link') %}
+					<li class="social-link__item">
+						{% if links == 1 %}
+							<a href="{{post.get_field('facebook_link')}}" target="_blank"><span class="text">facebook</span></a>
+						{% else %}
+							<a href="{{post.get_field('facebook_link')}}" target="_blank"><span class="icon icon--facebook"></span></a>
+						{% endif %}
+					</li>
+				{% endif %}
+				{% if post.get_field('twitter_link') %}
+					<li class="social-link__item">
+						{% if links == 1 %}
+							<a href="{{post.get_field('twitter_link')}}" target="_blank"><span class="text">twitter</span></a>
+						{% else %}
+							<a href="{{post.get_field('twitter_link')}}" target="_blank"><span class="icon icon--twitter"></span></a>
+						{% endif %}
+					</li>
+				{% endif %}
+				{% if post.get_field('instagram_link') %}
+					<li class="social-link__item">
+						{% if links == 1 %}
+							<a href="{{post.get_field('instagram_link')}}" target="_blank"><span class="text">instagram</span></a>
+						{% else %}
+							<a href="{{post.get_field('instagram_link')}}" target="_blank"><span class="icon icon--instagram"></span></a>
+						{% endif %}
+
+					</li>
+				{% endif %}
+			</ul>
+		{% endif %}
+
+	  </div>
+	</section>
+{% endblock %}

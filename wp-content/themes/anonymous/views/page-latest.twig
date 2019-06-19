@@ -1,0 +1,63 @@
+{% extends "page.twig" %}
+
+{% block page_content %}
+
+<section id="director-content" class="container content-section">
+
+	<section class="director__realisations">
+
+{% for film in post.get_field('films') %}
+
+		<article class="single-realisation">
+					
+					<div class="single-realisation__text text-wrapper">
+					
+						<h1 class="title">{{film.title}}</h1>
+
+						<span class="info">
+							<i class="director">{{(film.subtitle is empty) ? 'Video': film.subtitle}}</i>
+							<i class="hover-watch">Watch the film</i>
+						</span>
+					</div>
+
+					<div class="single-realisation__video">
+						<div class="video">
+							<div class="{{film.get_field('custom_file_mp4__webm')}} video-wrapper">
+								<div class="video-info hidden">
+										<span><i>{{film.title}}, {{film.get_field('subtitle')}}</i></span>
+										{% if film.get_field('director') is not empty %}
+											<span class="video-director"><i>by <a href="{{film.get_field('director')[0].link}}">{{film.get_field('director')[0].post_title|trim}}</a></i></span>
+										{% endif %}
+									</div>
+									
+								<div class="video-wrapper__overlay" style="background: url('{{film.get_field('cover')|resize(1280)}}') center no-repeat; background-size:cover;">
+									
+
+								</div>
+
+								<span class="icon icon--press-play hidden"></span>
+								{% if film.get_field('custom_file_mp4__webm') == 'wiredrive' %}
+									{{film.get_field('wiredrive')|parse_wiredrive}}
+								{% else %}
+									<video preload="none">
+										{% if film.get_field('video_full_webm') %}
+											<source src="{{film.get_field('video_full_webm')}}">
+										{% endif %}
+										{% if film.get_field('video_full_mp4') %}
+											<source src="{{film.get_field('video_full_mp4')}}">
+										{% endif %}
+									</video>
+								{% endif %}
+
+								<canvas class="canvas-loader"></canvas>
+							</div>
+						</div>
+					</div>
+				</article>
+{% endfor %}
+
+	</section>
+
+</section>
+
+{% endblock %}

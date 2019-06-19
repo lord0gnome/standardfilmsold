@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<!--[if IE 9]>
+<html class="ie-9" {{site.language_attributes}} data-device="{{device_type}}">
+<![endif]-->
+
+<html {{site.language_attributes}} data-device="{{device_type}}">
+
+<head>
+	<meta charset="{{site.charset}}" />
+
+	<title>{{site.name}}{{wp_title is not empty ? " | "}}{{wp_title}}</title>
+
+	{# SEO meta #}
+	<meta name="robots" content="index, follow" />
+	<meta name="description" content="{{site.description}}">
+	{# End SEO meta #}
+
+	{# IE meta #}
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta name="msapplication-tap-highlight" content="no" />
+	{# End IE meta #}
+
+	{# Apple meta #}
+	<meta name="apple-mobile-web-app-capable" content="no" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="apple-mobile-web-app-title" content="{{site.name}}" />
+	{# End Apple meta #}
+
+	{# Mobile meta #}
+	<meta name="HandheldFriendly" content="true" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	{# End mobile meta #}
+
+	{# Favicon #}
+	<link rel="shortcut icon" href="{{site.theme.link}}/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="{{site.theme.link}}/favicons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="{{site.theme.link}}/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="{{site.theme.link}}/favicons/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="{{site.theme.link}}/favicons/manifest.json">
+	<link rel="mask-icon" href="{{site.theme.link}}/favicons/safari-pinned-tab.svg" color="#000000">
+	<meta name="msapplication-config" content="{{site.theme.link}}/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#000000">
+	{# End favicon #}
+
+	<link rel="pingback" href="{{site.pingback_url}}" />
+
+	{{function('wp_head')}}

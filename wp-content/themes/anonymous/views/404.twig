@@ -1,0 +1,42 @@
+{% extends "page.twig" %}
+
+{% block page_content %}
+	<section class="container">
+		{% if device_type == 'desktop' %}
+		<svg xmlns="http://www.w3.org/2000/svg" height="0" width="0" class="svg-filter">
+			<filter id="filter">
+				<feImage xlink:href="{{post.thumbnail.src}}" preserveAspectRatio="xMidYMid"  />
+				<feComposite in2="SourceGraphic" operator="in" />
+			</filter>	
+		</svg>
+		
+		<style>
+			@supports (-webkit-background-clip: text) {
+				.head { background: url('{{post.thumbnail.src}}') center no-repeat; }
+			}
+
+			@supports not (-webkit-background-clip: text) {
+				.head { filter: url('#filter'); }
+			}
+		</style>
+		{% else %}
+		<style>
+			@supports (-webkit-background-clip: text) {
+				.head { background: url('{{post.get_field('mobile_title_background')|resize(250)}}') center no-repeat; }
+			}
+
+			@supports not (-webkit-background-clip: text) {
+				.head { color: #fff; }
+			}
+		</style>
+		{% endif %}
+
+		<div class="center">
+			<div class="head">
+				<h1>404</h1>
+			</div>
+
+			<p>Sorry, we couldn't find what you're looking for.</p>
+		</div>
+	</section>
+{% endblock %}

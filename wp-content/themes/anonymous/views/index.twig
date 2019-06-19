@@ -1,0 +1,123 @@
+{% extends "page.twig" %}
+
+{% block page_content %}
+
+	<section id="home">
+		{% if device_type == 'desktop' %}
+		<div class="loading"></div>
+		{% endif %}
+
+		<div class="preload">
+			{% if device_type != 'desktop' %}
+				<svg xmlns="http://www.w3.org/2000/svg" width="350" height="58" viewBox="0 0 116 19">
+					<path fill="#fff" fill-rule="evenodd" d="M70.868,79.721A6.949,6.949,0,0,1,66.511,81c-3.342,0-5.793-1.483-6.511-5.012l1.659-.9a4.85,4.85,0,0,0,.4,2.02c0.5,1.125,1.807,2.378,4.456,2.378a6.839,6.839,0,0,0,1.98-.256,3.755,3.755,0,0,0,2.847-3.58,3.311,3.311,0,0,0-.47-1.739c-0.594-.972-1.584-1.406-3.614-1.969a20.376,20.376,0,0,1-3.837-1.228,4.537,4.537,0,0,1-1.683-6.7c1.535-2.02,4.456-1.995,4.926-1.995a5.759,5.759,0,0,1,6.016,3.964l-1.535.844a5.222,5.222,0,0,0-.718-1.56,4.435,4.435,0,0,0-3.812-1.841,4.869,4.869,0,0,0-3.292,1.151,2.75,2.75,0,0,0-.817,2.071,2.832,2.832,0,0,0,.52,1.688,5.4,5.4,0,0,0,3.194,1.688c1.634,0.46,3.837.921,5.174,2.046A4.484,4.484,0,0,1,73.022,75.6,5.034,5.034,0,0,1,70.868,79.721Zm10.15-15.726V80.539H79.359V63.995h-5.5V62.486H86.538v1.509H81.018Zm31.008,16.545-10.249-15.6v15.6h-1.634V62.486h1.634l10.373,15.445-0.124-15.445h1.634V80.539h-1.634Zm16.884-2.123a6.251,6.251,0,0,1-2.253,1.637c-1.164.46-2.278,0.486-4.679,0.486h-4.555V62.486H122.1c0.619,0,1.213,0,1.832.026,2,0.077,3.465.358,4.926,1.969a10.141,10.141,0,0,1,2.352,6.981A10.911,10.911,0,0,1,128.909,78.417ZM127.8,65.759a4.362,4.362,0,0,0-1.783-1.355,10.676,10.676,0,0,0-3.837-.358h-3.07V79.005h2.624c2.3,0,3.714-.1,4.654-0.563a4.569,4.569,0,0,0,1.758-1.662,9.358,9.358,0,0,0,1.387-5.268A9.667,9.667,0,0,0,127.8,65.759Zm29.687,14.78-5.521-8h-4.084v8h-1.684V62.486h4.927c0.965,0,1.955-.026,2.946.026a5.071,5.071,0,0,1,4.332,2.4,5.667,5.667,0,0,1,.668,2.736,4.474,4.474,0,0,1-3.045,4.5,7.311,7.311,0,0,1-2.129.384l5.669,8h-2.079Zm-0.57-14.985c-0.816-1.406-2.227-1.534-3.639-1.534h-5.4v7.032h4.109c0.446,0,.916,0,1.386-0.026,1.263-.051,2.6-0.128,3.442-1.33a3.473,3.473,0,0,0,.618-2.122A3.927,3.927,0,0,0,156.912,65.555ZM173.7,78.417a6.251,6.251,0,0,1-2.253,1.637c-1.164.46-2.278,0.486-4.679,0.486h-4.555V62.486h4.679c0.619,0,1.213,0,1.832.026,2,0.077,3.465.358,4.926,1.969A10.141,10.141,0,0,1,176,71.462,10.911,10.911,0,0,1,173.7,78.417Zm-1.114-12.658A4.362,4.362,0,0,0,170.8,64.4a10.676,10.676,0,0,0-3.837-.358h-3.07V79.005h2.624c2.3,0,3.714-.1,4.654-0.563a4.569,4.569,0,0,0,1.758-1.662,9.358,9.358,0,0,0,1.387-5.268A9.667,9.667,0,0,0,172.584,65.759ZM135.526,73.71v1.382h4.689l2,5.447h1.807L137.07,62.486l-1.407-.015,0.765,2.215,3.291,9.025m-44.559,0v1.382H90.472l-2.005,5.447H86.66l6.956-18.053,1.407-.015-0.765,2.215-3.292,9.025" transform="translate(-60 -62)"/>
+				</svg>
+			{% endif %}
+		</div>
+
+		{% if device_type == 'desktop' %}
+			<h2 class="click-watch"><span>click</span> <span><i>to</i></span> <span>watch</span></h2>
+		{% else %}
+			<h2 class="click-watch hidden"><span>click</span> <span><i>to</i></span> <span>watch</span></h2>
+		{% endif %}
+
+		{% if device_type != 'desktop' %}
+		<div class="grab-icon is-animated">
+			<svg xmlns="http://www.w3.org/2000/svg" width="56" height="22" viewBox="0 0 56 22"><path fill="#fff" fill-rule="evenodd" d="M53 13v-2h-4v-1h4v-2l3 2v1zm-16.588 2.333v-4h1.294v4h-1.294zm-1.294 3.333v-3.333h1.294v3.333h-1.294zm-1.294 3.334v-3.333h1.294v3.333h-1.294zm3.882-16.667h1.294v6h-1.294v-6zm-2.588 1.334v3.333h-1.294v-7.333h1.294v2.666h1.294v1.334h-1.294zm-4.529 2h-1.295v-7.334h4.529v1.334h-3.235v6zm-5.176 0v-3.334h-1.295v-2.666h1.294v-1.334h1.294v7.334h-1.294zm-3.235 0h-1.296v-3.334h1.294v3.334zm0 0h1.294v4h-1.295v-1.334h-1.295v-1.333h1.294v-1.333zm-3.884 1.333v-1.333h2.588v1.333h-2.588zm1.294 4h-1.294v-1.333h1.294v1.333zm1.294 2.667h-1.294v-2.667h1.294v2.667zm1.295 1.333h-1.295v-1.333h1.294v1.333zm1.294 1.333h-1.294v-1.333h1.294v1.333zm1.294 2.667h-1.294v-2.667h1.294v2.667zm-7.765-9.333v-2.667h1.294v2.667h-1.294zm2.588-7.333v-2.667h1.294v2.666h-1.294zm1.294-4h3.235v1.333h-3.235v-1.334zm5.824-1.334h2.588v1.333h-2.588v-1.333zm9.706 4h1.294v1.333h-1.294v-1.333zm-33.412 9l-3-2v-1l3-2v2h4v1h-4v2z"/></svg>
+		</div>
+		{% endif %}
+
+		<div class="slideshow">
+			<ul class="slideshow-container">
+				{% for movie in movies %}
+					{% set terms = function('wp_get_post_terms', movie.ID, 'movie_category') %}
+					{% set terms_name = [] %}
+
+					{% for term in terms %}
+						{% set terms_name = terms_name|merge([term.slug]) %}
+					{% endfor %}
+
+					<li class="slideshow__item block--slideshow pointer" data-id="{{movie.id}}" data-director="{{movie.get_field('director')[0].ID|trim}}" data-categories="{{terms_name|join(' ')}}" style="z-index:{{loop.first ? '10' : '5'}};">
+						<div class="item-wrapper">
+							<div class="text-wrapper hidden">
+								<h1>{{movie.title}}</h1>
+
+								<span class="info">
+									<i class="director">{{"%s "|format(movie.get_field('subtitle'))}}{{movie.get_field('director') is not empty ? 'by ' : ''}}{{movie.get_field('director')[0].post_title|trim}}</i>
+									<i class="hover-watch">Watch the film</i>
+								</span>
+							</div>
+
+							<div class="video-preview-wrapper">
+								<video preload="auto" style="background: url('{{movie.get_field('cover')|resize(1280, 720)}}') center no-repeat; background-size: cover;" muted>
+									{% if movie.get_field('video_preview_webm') %}
+										<source src="{{movie.get_field('video_preview_webm')}}">
+									{% endif %}
+									{% if movie.get_field('video_preview_mp4') %}
+										<source src="{{movie.get_field('video_preview_mp4')}}">
+									{% endif %}
+								</video>
+
+								<canvas class="canvas-loader"></canvas>
+							</div>
+
+							<div class="{{movie.get_field('custom_file_mp4__webm')}} video-full-wrapper hidden">
+								<div class="mobile-cover" style="background: url('{{movie.get_field('cover')|resize(1280)}}') center no-repeat; background-size: cover;"></div>
+
+								<span class="icon icon--press-play"></span>
+
+								<div class="video-info hidden">
+									<span><i>{{movie.title}}, {{movie.get_field('subtitle')}}</i></span>
+									{% if movie.get_field('director') is not empty %}
+									<span class="video-director"><i>by <a href="{{movie.get_field('director')[0].link}}">{{movie.get_field('director')[0].post_title|trim}}</a></i></span>
+									{% endif %}
+								</div>
+
+								{% if movie.get_field('custom_file_mp4__webm') == 'wiredrive' %}
+									{{movie.get_field('wiredrive')|parse_wiredrive}}
+								{% else %}
+									<video preload="none">
+										{% if movie.get_field('video_full_webm') %}
+											<source src="{{movie.get_field('video_full_webm')}}">
+										{% endif %}
+										{% if movie.get_field('video_full_mp4') %}
+											<source src="{{movie.get_field('video_full_mp4')}}">
+										{% endif %}
+									</video>
+								{% endif %}
+							</div>
+						</div>
+
+						{% if device_type == 'desktop' %}
+						<div class="additional-content"></div>
+						{% endif %}
+					</li>
+
+				{% endfor %}
+			</ul>
+
+			{% if device_type != 'desktop' %}
+			<div class="mobile-nav hidden">
+				<div class="prev-btn prev-btn-mobile">prev</div>
+				<span>|</span>
+				<div class="next-btn next-btn-mobile">next</div>
+			</div>
+			{% endif %}
+		</div>
+
+		{% if device_type == 'desktop' %}
+		<div class="prev-btn">
+			<span>prev</span>
+		</div>
+		<div class="next-btn">
+			<span>next</span>
+		</div>
+		{% endif %}
+
+		<button id="view-more" class="hidden">view related films</button>
+		<button id="close">close</button>
+
+		<canvas class="canvas-loader-mobile"></canvas>
+	</section>
+
+{% endblock %}

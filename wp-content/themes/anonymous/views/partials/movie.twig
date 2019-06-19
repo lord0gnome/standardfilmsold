@@ -1,0 +1,31 @@
+{% spaceless %}
+<section class="container">
+	<h1 class="movie__title">{{post.title}} / {{post.get_field('subtitle')}}</h1>
+	
+	<div class="movie__description">
+		{{post.get_field('description')}}
+	</div>
+
+	{% for link in post.get_field('links') %}
+		<a class="movie__link" href="{{link.url}}" target="_blank">{{link.text}}</a>
+	{% endfor %}
+	
+	{% if post.get_field('slideshow') is not empty %}
+		<article class="movie__slideshow slideshow">
+			<ul class="slideshow-container">
+				{% for image in post.get_field('slideshow') %}
+					<li class="block--slideshow">
+						<img src="{{ TimberImage(image) }}" width="{{TimberImage(image).width}}" height="{{TimberImage(image).height}}" alt="{{post.title}}">
+					</li>
+				{% endfor %}
+			</ul>
+
+			<nav class="slideshow--nav">
+				<span class="prev-btn">previous</span>
+				<span>|</span>
+				<span class="next-btn">next</span>
+			</nav>
+		</article>
+	{% endif %}
+</section>
+{% endspaceless %}

@@ -1,0 +1,39 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	
+	{% block page_content %}
+
+		<section class="container">
+			<div class="directors__background">
+				<div class="scale">
+					<ul>
+					  {% for post in posts %}
+						{% if device_type == 'desktop' %}
+							<li  data-src="{{post.get_field('director_cover')|resize(1280, 720)}}">
+								<span class="wrapper">
+									<img src="{{post.get_field('director_cover')|resize(1280, 720)}}" alt="{{post.title}}" class="cover-blur">
+						{% else %}
+							<li>
+								<span class="wrapper">
+									<div class="img directors__cover" style="background: url('{{post.get_field('director_cover')|resize(1280, 720)}}') center no-repeat; background-size: cover;"></div>
+						{% endif %}
+								</span>
+							</li>
+					  {% endfor %}
+					</ul>
+				</div>
+			</div>
+		</section>
+	 
+		<nav>
+			<ul>
+			  {% for post in posts %}
+				<li data-color="{{post.get_field('cover_color')}}"><a href="{{post.link}}" data-index="{{loop.index}}">{{post.title}}</a></li>
+			  {% endfor %}
+			</ul>
+		</nav>
+
+	{% endblock %}
+
+{% endblock %}

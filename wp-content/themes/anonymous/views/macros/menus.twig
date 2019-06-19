@@ -1,0 +1,13 @@
+{% macro embedded_list(items) %}
+    {% import _self as menus %}
+    {% for item in items %}
+        <li>
+            <a href="{{ item.link }}">{{ item.title }}</a>
+            {% if item.has_child_class %}
+                <ul>
+                    {{ menus.embedded_list(item.get_children) }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endmacro %}
